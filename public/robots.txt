@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cafelocus.com/sitemap.xml
