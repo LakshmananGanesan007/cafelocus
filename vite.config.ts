@@ -14,14 +14,24 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: "dist",
+    sourcemap: false,
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
-          ui: ["lucide-react"],
+          ui: ["lucide-react", "@radix-ui/react-*"],
         },
       },
     },
+    chunkSizeWarningLimit: 1000,
   },
-  assetsInclude: ['**/*.mp4'], // Add this line to handle MP4 files
+  assetsInclude: ['**/*.mp4'],
 });
