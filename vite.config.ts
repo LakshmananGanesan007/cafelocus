@@ -16,33 +16,16 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: false,
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    // Remove terser options - use esbuild instead (faster, no extra dependency)
+    minify: "esbuild",
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
-          // FIXED: Don't use wildcard pattern that causes issues
-          radix: [
-            "@radix-ui/react-accordion",
-            "@radix-ui/react-avatar", 
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-dropdown-menu",
-            "@radix-ui/react-label",
-            "@radix-ui/react-separator",
-            "@radix-ui/react-slot",
-            "@radix-ui/react-toast",
-            "@radix-ui/react-tooltip"
-          ],
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
   },
   assetsInclude: ['**/*.mp4'],
 });
