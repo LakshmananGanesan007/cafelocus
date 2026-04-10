@@ -27,7 +27,18 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
-          ui: ["lucide-react", "@radix-ui/react-*"],
+          // FIXED: Don't use wildcard pattern that causes issues
+          radix: [
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-avatar", 
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-label",
+            "@radix-ui/react-separator",
+            "@radix-ui/react-slot",
+            "@radix-ui/react-toast",
+            "@radix-ui/react-tooltip"
+          ],
         },
       },
     },
