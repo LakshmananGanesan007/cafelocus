@@ -1,20 +1,31 @@
 import heroVideo from "@/assets/backround-TeaSteam.mp4";
 import { Star, Clock, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const Hero = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    // Preload video immediately
+    const video = document.createElement('video');
+    video.preload = 'auto';
+    video.src = heroVideo;
+    video.oncanplay = () => setVideoLoaded(true);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-end overflow-hidden">
-      {/* Video Background */}
+      {/* Video Background - No poster, preload auto */}
       <video
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ filter: "brightness(0.85)" }}
       >
         <source src={heroVideo} type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
       
       {/* Gradient Overlay */}

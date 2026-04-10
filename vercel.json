@@ -6,6 +6,10 @@
   "outputDirectory": "dist",
   "routes": [
     {
+      "src": "/features",
+      "dest": "/index.html"
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },

@@ -7,6 +7,7 @@ import Menu from "@/pages/Menu";
 import AboutPage from "@/pages/AboutPage";
 import Contact from "@/pages/Contact";
 import ReservationPage from "@/pages/ReservationPage";
+import Features from "@/pages/Features";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -19,21 +20,18 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  console.log("App is rendering"); // Debug log
-  
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/reservations" element={<ReservationPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/" element={<Layout><Index /></Layout>} />
+          <Route path="/menu" element={<Layout><Menu /></Layout>} />
+          <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+          <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/reservations" element={<Layout><ReservationPage /></Layout>} />
+          <Route path="/features" element={<Features />} />
+          <Route path="*" element={<Layout><NotFound /></Layout>} />
+        </Routes>
       </BrowserRouter>
       <Toaster />
     </QueryClientProvider>

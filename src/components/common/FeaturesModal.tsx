@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, Check, Star, Coffee, Sparkles, MessageCircle, FileText, Settings, ShoppingBag, TrendingUp, Users, Award, Clock, Zap, Rocket, Crown, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface FeaturesModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ const FeaturesModal = ({ isOpen, onClose }: FeaturesModalProps) => {
   const [customRequirements, setCustomRequirements] = useState("");
   const [selectedStarterFeatures, setSelectedStarterFeatures] = useState<string[]>([]);
   const [selectedBusinessFeatures, setSelectedBusinessFeatures] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -147,8 +149,17 @@ Thank you.`;
     }
   };
 
+  const handleClose = () => {
+    // If on /features page, navigate home, else just close
+    if (window.location.pathname === '/features') {
+      navigate('/');
+    } else {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-espresso/95 backdrop-blur-md" onClick={onClose}>
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-espresso/95 backdrop-blur-md" onClick={handleClose}>
       <div className="min-h-screen px-4 py-8 flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
         <div className="relative max-w-5xl w-full bg-background rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto">
           <div className="sticky top-0 bg-background z-10 border-b border-border px-6 py-4 flex justify-between items-center">
@@ -162,7 +173,7 @@ Thank you.`;
               </div>
             </div>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-2 hover:bg-secondary rounded-full transition-colors"
             >
               <X className="w-5 h-5 text-foreground" />
@@ -259,7 +270,6 @@ Thank you.`;
                       <p className="font-body text-sm text-muted-foreground">Essential features for your café's online presence</p>
                     </div>
                     <div className="p-6">
-                      {/* Trust Indicators for Starter */}
                       <div className="grid grid-cols-3 gap-4 mb-6 pb-4 border-b border-border">
                         <div className="flex items-center gap-2">
                           <Rocket className="w-4 h-4 text-gold" />
@@ -305,7 +315,7 @@ Thank you.`;
                   </div>
                 )}
 
-                {/* Business Plan Details with Premium Stats */}
+                {/* Business Plan Details */}
                 {selectedPlan === "business" && (
                   <div className="border-2 border-gold/40 rounded-xl overflow-hidden shadow-xl">
                     <div className="bg-gradient-to-br from-gold/5 via-gold/10 to-transparent px-6 py-6 border-b border-gold/20">
@@ -388,7 +398,6 @@ Thank you.`;
                       <p className="font-body text-sm text-muted-foreground">Complete solution for established brands</p>
                     </div>
                     <div className="p-6">
-                      {/* Trust Indicators for Premium */}
                       <div className="grid grid-cols-3 gap-4 mb-6 pb-4 border-b border-border">
                         <div className="flex items-center gap-2">
                           <Crown className="w-4 h-4 text-gold" />
